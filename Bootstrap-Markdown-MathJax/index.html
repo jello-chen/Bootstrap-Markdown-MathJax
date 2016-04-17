@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-markdown/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" media="screen"/>
+</head>
+<body>
+    <textarea id="container" data-width="100%" rows="30"></textarea>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+        showProcessingMessages: false,
+        tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']], processEscapes: true}
+        });
+    </script>
+    <script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_HTMLorMML" type="text/javascript"></script>
+    <script src="Scripts/jquery.min.js"></script>
+    <script src="Scripts/bootstrap-markdown.js"></script>
+    <script src="Scripts/markdown.js"></script>
+    <script src="Scripts/to-markdown.js"></script>
+    <script src="Scripts/bootstrap-markdown.zh.js"></script>
+    <script type="text/javascript">
+        ; $("#container").markdown({
+            language: 'zh',
+            savable: false,
+            onShow: function (e) {
+                //
+            },
+            onPreview: function (e) {
+                var previewContent;
+                if (e.isDirty()) {
+                    previewContent = e.parseContent();
+                } else {
+                    previewContent = "Default content"
+                }
+                return previewContent;
+            },
+            onShowingPreview: function (e, f) {
+                if (typeof MathJax !== 'undefined') {
+                    var previewContainer = e.$editor.find('div[data-provider="markdown-preview"]');
+                    if (previewContainer.length == 1) {
+                        MathJax.Hub.Queue(["Typeset", MathJax.Hub, previewContainer[0]]);
+                    }
+                }
+                $(f).show();
+            },
+            onSave: function (e) {
+                //
+            },
+            onChange: function (e) {
+                //
+            },
+            onFocus: function (e) {
+                //
+            },
+            onBlur: function (e) {
+                //
+            }
+        });
+    </script>
+</body>
+</html>
